@@ -82,13 +82,4 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/text-analyzer-frontend:latest
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: docker
 
-    steps:
-      - name: Trigger Netlify deploy
-        run: curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
-
-      - name: Trigger Render deploy
-        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
