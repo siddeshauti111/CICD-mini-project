@@ -50,9 +50,8 @@ jobs:
         working-directory: backend
         run: python -m compileall app
 
-      # ---------- SONAR (optional safe) ----------
+      # ---------- SONAR (OPTIONAL REMOVE IF ERROR) ----------
       - name: SonarCloud Scan
-        if: ${{ secrets.SONAR_TOKEN != '' }}
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -94,9 +93,7 @@ jobs:
 
     steps:
       - name: Trigger Netlify deploy
-        if: ${{ secrets.NETLIFY_BUILD_HOOK != '' }}
         run: curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
 
       - name: Trigger Render deploy
-        if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
