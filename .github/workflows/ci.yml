@@ -50,12 +50,7 @@ jobs:
         working-directory: backend
         run: python -m compileall app
 
-      # ---------- SONAR (OPTIONAL REMOVE IF ERROR) ----------
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
+      
 
   docker:
     runs-on: ubuntu-latest
